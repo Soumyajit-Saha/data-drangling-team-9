@@ -27,19 +27,23 @@ vaccineData = covidData = pd.read_csv('Vaccine.csv')
 
 ItalyActiveData = activeData[activeData['ID'] == 'IT'].fillna(method = 'ffill').drop_duplicates(subset='Date', keep="first")
 ItalyActiveData['Date'] = pd.to_datetime(ItalyActiveData['Date'], format='%Y-%m-%d')
-ItalyActiveData = ItalyActiveData[ItalyActiveData['Cases_New'] >= 0]
+# ItalyActiveData = ItalyActiveData[ItalyActiveData['Cases_New'] >= 0]
+# ItalyActiveData[ItalyActiveData['Cases_New'] < 0] = 0
 
 ItalyConfirmedData = confirmedData[confirmedData['ID'] == 'IT'].fillna(method = 'ffill').drop_duplicates(subset='Date', keep="first")
 ItalyConfirmedData['Date'] = pd.to_datetime(ItalyConfirmedData['Date'], format='%Y-%m-%d')
-ItalyConfirmedData = ItalyConfirmedData[ItalyConfirmedData['Cases_New'] >= 0]
+# ItalyConfirmedData = ItalyConfirmedData[ItalyConfirmedData['Cases_New'] >= 0]
+# ItalyConfirmedData[ItalyConfirmedData['Cases_New'] < 0] = 0
 
 ItalyDeathData = deathData[deathData['ID'] == 'IT'].fillna(method = 'ffill').drop_duplicates(subset='Date', keep="first")
 ItalyDeathData['Date'] = pd.to_datetime(ItalyDeathData['Date'], format='%Y-%m-%d')
-ItalyDeathData = ItalyDeathData[ItalyDeathData['Cases_New'] >= 0]
+# ItalyDeathData = ItalyDeathData[ItalyDeathData['Cases_New'] >= 0]
+# ItalyDeathData[ItalyDeathData['Cases_New'] < 0] = 0
 
 ItalyHospitalizedData = hospitalizedData[hospitalizedData['ID'] == 'IT'].fillna(method = 'ffill').drop_duplicates(subset='Date', keep="first")
 ItalyHospitalizedData['Date'] = pd.to_datetime(ItalyHospitalizedData['Date'], format='%Y-%m-%d')
-ItalyHospitalizedData = ItalyHospitalizedData[ItalyHospitalizedData['Cases_New'] >= 0]
+# ItalyHospitalizedData = ItalyHospitalizedData[ItalyHospitalizedData['Cases_New'] >= 0]
+# ItalyHospitalizedData[ItalyHospitalizedData['Cases_New'] < 0] = 0
 
 ItalyVaccineData = vaccineData[vaccineData['ID'] == 'IT'].fillna(method = 'ffill').drop_duplicates(subset='Date', keep="first")
 ItalyVaccineData['Date'] = pd.to_datetime(ItalyVaccineData['Date'], format='%Y-%m-%d')
@@ -88,3 +92,9 @@ plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=100))
 plt.gcf().autofmt_xdate()
 plt.legend()
 plt.show()
+
+ItalyActiveData.to_csv('Italy_Active_data.csv')
+ItalyConfirmedData.to_csv('Italy_Confirmed_data.csv')
+ItalyDeathData.to_csv('Italy_Death_data.csv')
+ItalyHospitalizedData.to_csv('Italy_Hospitalized_data.csv')
+ItalyVaccineData.to_csv('Italy_vaccine_data.csv')
